@@ -16,4 +16,13 @@ export const createUserSlice: StateCreator<
     set((state) => {
       state.address = address;
     }),
+  fetchUser: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    set({
+      address: "",
+      fullname: "John Doe",
+      userName: "johndoe",
+      age: 25,
+    });
+  },
 });

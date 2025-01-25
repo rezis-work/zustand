@@ -7,6 +7,7 @@ export type UserState = {
 
 export type UserActions = {
   setAddress: (address: string) => void;
+  fetchUser: () => Promise<void>;
 };
 
 export type UserSlice = UserState & UserActions;

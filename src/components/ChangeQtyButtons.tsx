@@ -2,6 +2,7 @@ import { useShallow } from "zustand/shallow";
 import { useStore } from "../store/store";
 import { Button } from "./ui/button";
 import { Minus, Plus } from "lucide-react";
+import { useEffect } from "react";
 
 type Props = { productId: number };
 
@@ -17,7 +18,21 @@ const ChangeQtyButtons = ({ productId }: Props) => {
 
   const product = getProductById(productId);
 
-  console.log(product);
+  useEffect(() => {
+    const onSub = useStore.subscribe(
+      (state) => state.products,
+      (products) => {
+        setTotal(
+          products.reduce((acc, item) => acc + item.qty * item.price, 0)
+        );
+      },
+      {
+        fireImmediately: true,
+      }
+    );
+
+    return onSub;
+  }, [setTotal]);
 
   return (
     <>
